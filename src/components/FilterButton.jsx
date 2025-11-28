@@ -1,7 +1,28 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilter } from "../store/actions/filter";
 
 const FilterButton = () => {
-  return <div></div>;
+  const current = useSelector((s) => s.filter);
+  const dispatch = useDispatch();
+
+  const btn = (label, f) => (
+    <button
+      className={`px-4 rounded-md ${
+        current === f ? "bg-amber-500 text-white" : "bg-green-400 text-gray-700"
+      }`}
+      onClick={() => dispatch(setFilter(f))}
+    >
+      {label}
+    </button>
+  );
+  return (
+    <div>
+      {btn("All", "ALL")}
+      {btn("Active", "ACTIVE")}
+      {btn("Done", "DONE")}
+    </div>
+  );
 };
 
 export default FilterButton;

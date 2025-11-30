@@ -89,41 +89,43 @@ export default function TodoItem({ todo }) {
           : "bg-gray-200 border-slate-400 border-2"
       }`}
     >
-      <div className="flex items-center gap-3">
-        <input
-          type="checkbox"
-          checked={todo.completed}
-          onChange={() => dispatch(toggleTodo(todo.id))}
-          className="w-5 h-5 border border-slate-400"
-        />
-        {editing ? (
+      <div className="flex flex-col sm:flex-row items-center gap-3">
+        <div className="flex gap-2 items-center w-full">
           <input
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") saveEdit();
-              if (e.key === "Escape") {
-                setValue(todo.text);
-                setEditing(false);
-              }
-            }}
-            autoFocus
-            className="flex-1 px-3 py-2 rounded-md border-2 border-slate-400 "
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => dispatch(toggleTodo(todo.id))}
+            className="w-5 h-5 border  border-slate-400"
           />
-        ) : (
-          <span
-            className={`flex-1 text-lg 
+          {editing ? (
+            <input
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") saveEdit();
+                if (e.key === "Escape") {
+                  setValue(todo.text);
+                  setEditing(false);
+                }
+              }}
+              autoFocus
+              className="flex-1 px-3 py-2 rounded-md border-2 border-slate-400 "
+            />
+          ) : (
+            <span
+              className={`flex-1 text-lg 
               ${
                 todo.completed
                   ? "line-through text-slate-500 "
                   : "text-slate-800 border border-slate-400 rounded-md"
               }
              ${isOverdue ? "text-red-600" : ""}`}
-            onDoubleClick={() => setEditing(true)}
-          >
-            {todo.text}
-          </span>
-        )}
+              onDoubleClick={() => setEditing(true)}
+            >
+              {todo.text}
+            </span>
+          )}
+        </div>
         {/* Due Date + Time Left Badge – Both Shown Together */}
         {todo.dueDate && (
           <div className="flex items-center gap-3">
@@ -148,18 +150,20 @@ export default function TodoItem({ todo }) {
             </span>
           </div>
         )}
-        <button
-          onClick={() => setEditing(true)}
-          className="px-3 py-1 rounded-md border border-slate-400 text-sm hover:bg-slate-100"
-        >
-          Edit
-        </button>
-        <button
-          onClick={() => dispatch(deleteTodo(todo.id))}
-          className="px-3 py-1 rounded-md border border-red-400 text-sm text-red-600 hover:bg-red-100"
-        >
-          Delete
-        </button>
+        <div className="flex sm:flex-row gap-2 justify-between items-center w-full sm:w-auto">
+          <button
+            onClick={() => setEditing(true)}
+            className="px-3 py-1 rounded-md border border-slate-400 text-sm hover:bg-slate-100"
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => dispatch(deleteTodo(todo.id))}
+            className="px-3 py-1 rounded-md border border-red-400 text-sm text-red-600 hover:bg-red-100"
+          >
+            Delete
+          </button>
+        </div>
       </div>
 
       {editing && (
@@ -182,56 +186,60 @@ export default function TodoItem({ todo }) {
             {todo.subtasks.map((s) => (
               <li
                 key={s.id}
-                className="flex items-center gap-2 bg-slate-100 border border-slate-400 p-2 rounded-md"
+                className="flex flex-col sm:flex-row items-center gap-2 bg-slate-100 border border-slate-400 p-2 rounded-md"
               >
-                <input
-                  type="checkbox"
-                  checked={s.completed}
-                  onChange={() => dispatch(toggleSubTask(todo.id, s.id))}
-                  className="w-4 h-4"
-                />
-                {editingSubtask.subtaskId === s.id ? (
+                <div className="w-full flex items-center gap-2">
                   <input
-                    value={editingSubtask.text}
-                    onChange={(e) =>
-                      setEditingSubtask({
-                        ...editingSubtask,
-                        text: e.target.value,
-                      })
-                    }
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") saveSubEdit(s.id);
-                      if (e.key === "Escape")
-                        setEditingSubtask({ subtaskId: null, text: "" });
-                    }}
-                    autoFocus
-                    className="flex-1 px-2 py-1 rounded-md border border-slate-200"
+                    type="checkbox"
+                    checked={s.completed}
+                    onChange={() => dispatch(toggleSubTask(todo.id, s.id))}
+                    className="w-4 h-4"
                   />
-                ) : (
-                  <span
-                    className={`flex-1 ${
-                      s.completed
-                        ? "line-through text-slate-500"
-                        : "text-slate-800"
-                    }`}
+                  {editingSubtask.subtaskId === s.id ? (
+                    <input
+                      value={editingSubtask.text}
+                      onChange={(e) =>
+                        setEditingSubtask({
+                          ...editingSubtask,
+                          text: e.target.value,
+                        })
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") saveSubEdit(s.id);
+                        if (e.key === "Escape")
+                          setEditingSubtask({ subtaskId: null, text: "" });
+                      }}
+                      autoFocus
+                      className="flex-1 px-2 py-1 rounded-md border border-slate-200"
+                    />
+                  ) : (
+                    <span
+                      className={`flex-1  ${
+                        s.completed
+                          ? "line-through text-slate-500"
+                          : "text-slate-800 border w-full border-slate-400 rounded-md "
+                      }`}
+                    >
+                      {s.text}
+                    </span>
+                  )}
+                </div>
+                <div className="flex justify-between sm:justify-end gap-2 w-full sm:w-auto">
+                  <button
+                    onClick={() =>
+                      setEditingSubtask({ subtaskId: s.id, text: s.text })
+                    }
+                    className="text-sm text-blue-600 border px-3 py-0.5 rounded-md border-slate-400"
                   >
-                    {s.text}
-                  </span>
-                )}
-                <button
-                  onClick={() =>
-                    setEditingSubtask({ subtaskId: s.id, text: s.text })
-                  }
-                  className="text-sm text-blue-600 border px-3 py-0.5 rounded-md border-slate-400"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => dispatch(deleteSubTask(todo.id, s.id))}
-                  className="text-sm text-red-600 border px-3 py-0.5 rounded-md border-red-400"
-                >
-                  Del
-                </button>
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => dispatch(deleteSubTask(todo.id, s.id))}
+                    className="text-sm text-red-600 border px-3 py-0.5 rounded-md border-red-400"
+                  >
+                    Del
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
@@ -239,7 +247,7 @@ export default function TodoItem({ todo }) {
           <p className="text-sm text-slate-400">No subtasks yet</p>
         )}
 
-        <div className="flex gap-2 mt-2">
+        <div className="w-full flex flex-col sm:flex-row gap-2 mt-2">
           <input
             placeholder="Add subtask and press +"
             value={subtaskInput}

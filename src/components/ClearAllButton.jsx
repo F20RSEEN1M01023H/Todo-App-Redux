@@ -20,7 +20,28 @@ const ClearAllButton = () => {
   return (
     <button
       onClick={handleClearAll}
-      className=" px-6 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-lg shadow-lg transform hover:scale-105 transition-all"
+      className="
+      
+    w-60 
+    mt-4
+    sm:mt-0              /* Full width on mobile */
+    sm:w-auto             /* Normal width on sm+ (sits in row) */
+    px-6 
+    py-3                  /* Slightly taller for mobile touch */
+    text-sm 
+    sm:text-base          /* Bigger text on larger screens */
+    bg-slate-900 
+    hover:bg-slate-800 
+    text-white 
+    font-bold 
+    rounded-lg 
+    shadow-lg 
+    transform 
+    hover:scale-105 
+    active:scale-95 
+    transition-all 
+    duration-200
+  "
     >
       Reset All Data (Delete Everything)
     </button>

@@ -34,7 +34,8 @@ const TodoInput = () => {
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-2 w-full mt-5">
+      <div className="flex flex-col sm:flex-row gap-4 w-full mt-5 items-center justify-center px-4">
+        {/* Input - Full width on mobile, flexible on larger screens */}
         <input
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -43,28 +44,36 @@ const TodoInput = () => {
           }}
           placeholder="Add Todo Here And Press Enter to Add"
           type="text"
-          className="flex-1 border-2 text-lg border-white rounded-md px-4 p-2 focus:outline-none bg-transparent text-white"
+          className="w-full sm:flex-1 border-2 text-lg border-white rounded-md px-4 py-3 focus:outline-none bg-transparent text-white placeholder:text-gray-300"
         />
+
+        {/* Button - Full width on mobile, auto width on desktop */}
         <button
           onClick={onAdd}
-          className="rounded-md bg-slate-800 px-6 py-2 transform hover:scale-105 text-white border-2 border-white font-semibold hover:bg-slate-700"
+          className="w-full sm:w-auto rounded-md bg-slate-800 px-8 py-3 transform hover:scale-105 text-white border-2 border-white font-semibold hover:bg-slate-700 transition-all duration-200"
         >
           Add Todo
         </button>
       </div>
 
-      <div className="flex gap-2 items-center">
-        <label className="text-white">Due Date:</label>
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-center px-4 mt-6">
+        {/* Label */}
+        <label className="text-white font-medium min-w-max">Due Date:</label>
+
+        {/* Date Input */}
         <input
           type="date"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
           min={todayDate}
-          className="px-3 py-1 border border-white rounded-md bg-transparent text-white"
+          className="px-4 py-3 border-2 border-white rounded-lg bg-transparent text-white focus:outline-none focus:border-white/70 transition-colors"
         />
-        <p className="text-sm text-gray-300">(Only today or future dates)</p>
-      </div>
 
+        {/* Helper Text */}
+        <p className="text-sm text-gray-300 text-center sm:text-left">
+          (Only today or future dates)
+        </p>
+      </div>
       {/* <div>
         <div className="flex gap-2">
           <input

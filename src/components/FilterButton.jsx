@@ -8,11 +8,24 @@ const FilterButton = () => {
 
   const btn = (label, f) => (
     <button
-      className={`px-4  rounded-md font-medium transform hover:scale-105 ${
-        current === f
-          ? "bg-amber-500 text-white"
-          : "bg-green-400 text-gray-700 hover:bg-green-500"
-      }`}
+      className={`
+        px-5 py-3 
+        rounded-xl 
+        font-semibold 
+        text-sm 
+        sm:text-base 
+        transform 
+        hover:scale-105 
+        active:scale-95 
+        transition-all 
+        duration-200 
+        min-w-max
+        ${
+          current === f
+            ? "bg-amber-500 text-white shadow-lg"
+            : "bg-green-400 text-gray-700 hover:bg-green-500 shadow-md"
+        }
+      `}
       onClick={() => dispatch(setFilter(f))}
     >
       {label}
@@ -20,7 +33,7 @@ const FilterButton = () => {
   );
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-3 justify-center sm:justify-start px-4">
       {btn("All", "ALL")}
       {btn("Active", "ACTIVE")}
       {btn("Done", "DONE")}

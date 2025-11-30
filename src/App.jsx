@@ -12,7 +12,6 @@ const App = () => {
           Todo App React + plain Redux + Tailwind CSS
         </h1>
         <TodoInput />
-
         <div className="flex mt-4 justify-between">
           <FilterButton />
           <ClearAllButton />

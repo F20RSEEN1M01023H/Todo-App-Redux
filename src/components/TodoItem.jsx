@@ -95,7 +95,7 @@ export default function TodoItem({ todo }) {
             type="checkbox"
             checked={todo.completed}
             onChange={() => dispatch(toggleTodo(todo.id))}
-            className="w-5 h-5 border  border-slate-400"
+            className="w-5 h-5 border border-slate-400 flex-shrink-0"
           />
           {editing ? (
             <input

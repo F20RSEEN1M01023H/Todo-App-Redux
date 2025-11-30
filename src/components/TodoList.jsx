@@ -14,11 +14,13 @@ export default function TodoList() {
   });
 
   if (!visible.length) {
-    return <p className="text-slate-500">No todos yet — add one!</p>;
+    return (
+      <p className="text-slate-500 text-center mt-4">No todos yet — add one!</p>
+    );
   }
 
   return (
-    <ul className="space-y-3">
+    <ul className="space-y-4 mt-6">
       {visible.map((t) => (
         <TodoItem key={t.id} todo={t} />
       ))}

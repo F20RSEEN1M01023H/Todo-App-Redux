@@ -1,6 +1,5 @@
-import React from "react";
 import { createStore, combineReducers } from "redux";
-import todoReducer from "./reducers/todo";
+import todoReducer from "./reducers/todo"; // Changed to todoReducer
 import filterReducer from "./reducers/filter";
 
 const rootReducers = combineReducers({

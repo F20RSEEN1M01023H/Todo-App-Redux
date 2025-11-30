@@ -2,6 +2,7 @@ import React from "react";
 import TodoInput from "./components/TodoInput";
 import FilterButton from "./components/FilterButton";
 import TodoList from "./components/TodoList";
+import ClearAllButton from "./components/ClearAllButton";
 
 const App = () => {
   return (
@@ -11,7 +12,11 @@ const App = () => {
           Todo App React + plain Redux + Tailwind CSS
         </h1>
         <TodoInput />
-        <FilterButton />
+
+        <div className="flex mt-4 justify-between">
+          <FilterButton />
+          <ClearAllButton />
+        </div>
         <TodoList />
       </div>
     </div>

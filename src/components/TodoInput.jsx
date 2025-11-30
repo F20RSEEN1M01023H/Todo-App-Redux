@@ -47,7 +47,7 @@ const TodoInput = () => {
         />
         <button
           onClick={onAdd}
-          className="rounded-md bg-slate-800 px-6 py-2 text-white border-2 border-white font-semibold hover:bg-slate-700"
+          className="rounded-md bg-slate-800 px-6 py-2 transform hover:scale-105 text-white border-2 border-white font-semibold hover:bg-slate-700"
         >
           Add Todo
         </button>

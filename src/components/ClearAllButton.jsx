@@ -24,12 +24,12 @@ const ClearAllButton = () => {
       
     w-60 
     mt-4
-    sm:mt-0              /* Full width on mobile */
-    sm:w-auto             /* Normal width on sm+ (sits in row) */
+    sm:mt-0            
+    sm:w-auto             
     px-6 
-    py-3                  /* Slightly taller for mobile touch */
+    py-3                
     text-sm 
-    sm:text-base          /* Bigger text on larger screens */
+    sm:text-base         
     bg-slate-900 
     hover:bg-slate-800 
     text-white 
